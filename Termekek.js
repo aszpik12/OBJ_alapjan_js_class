@@ -3,15 +3,23 @@ import { KEDVENCLISTA, LISTA } from "./adatok.js";
 import Aszinkron from "./Aszinkron.js";
 
 class Termekek {
+  #vegpont
   #kedvencek = [];
   constructor() {
     const aszinkron = new Aszinkron();
-    let vegpont = "adatok.json";
-    aszinkron.adatBeolvas(vegpont, this.#termekMegjelenito);
+    this.#vegpont = "http://localhost:3000/LISTA";
+    aszinkron.adatBeolvas(this.#vegpont, this.#termekMegjelenito);
 
-    $(window).on("elemKattintas", (event) => {
+    $(window).on("kedvencekhez", (event) => {
       KEDVENCLISTA.push(event.detail);
       console.log(KEDVENCLISTA);
+    });
+
+ 
+    $(window).on("torol", (event) => {
+      console.log(event.detail)
+
+
     });
   }
 
